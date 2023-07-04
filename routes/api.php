@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('users/create', function () {
+    $user = User::create([
+        'name' => 'Min Htet Ko',
+        'email' => "mhk@gmail.com",
+        "password" => "12345678"
+    ]);
+    return response()->json(['message' => 'User account created.', 'data' => $user]);
 });
